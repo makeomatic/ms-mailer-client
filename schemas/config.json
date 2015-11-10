@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "required": [ "prefix", "routes" ],
+  "properties": {
+    "prefix": {
+      "type": "string",
+      "minLength": 1
+    },
+    "routes": {
+      "type": "object",
+      "properties": {
+        "adhoc": {
+          "type": "string",
+          "minLength": 1
+        },
+        "predefined": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
