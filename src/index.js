@@ -1,6 +1,6 @@
 const ld = require('lodash');
 const Validator = require('ms-amqp-validation');
-const { validateSync } = new Validator('./schemas');
+const { validateSync } = new Validator('../schemas');
 
 module.exports = class MailerClient {
 

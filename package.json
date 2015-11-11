@@ -1,6 +1,6 @@
 {
   "name": "ms-mailer-client",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "client for ms-mailer",
   "main": "./lib/index.js",
   "scripts": {
