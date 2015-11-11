@@ -14,7 +14,7 @@ describe('MailerClient', function testSuite() {
   it('throws on missing amqp client', function test() {
     expect(() => {
       return new MailerClient();
-    }).to.throw(/amqp client must be passed as a second argument/);
+    }).to.throw(/amqp client must be passed as a first argument/);
   });
 
   it('constructs amqp client when correct configuration is passed', function test() {
