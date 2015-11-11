@@ -32,7 +32,7 @@ module.exports = class MailerClient {
     }
 
     if (!amqp) {
-      throw new Error('amqp client must be passed as a second argument');
+      throw new Error('amqp client must be passed as a first argument');
     }
     this._amqp = amqp;
   }

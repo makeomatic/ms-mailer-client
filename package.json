@@ -36,6 +36,6 @@
   },
   "dependencies": {
     "lodash": "^3.10.1",
-    "ms-amqp-validation": "^0.2.2"
+    "ms-amqp-validation": "^0.3.0"
   }
 }
