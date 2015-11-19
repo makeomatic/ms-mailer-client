@@ -27,8 +27,8 @@ module.exports = class MailerClient {
 
     // check configuration
     const isntValid = validateSync('config', config);
-    if (isntValid) {
-      throw isntValid;
+    if (isntValid.error) {
+      throw isntValid.error;
     }
 
     if (!amqp) {
