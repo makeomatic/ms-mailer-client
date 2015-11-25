@@ -1,5 +1,5 @@
 const ld = require('lodash');
-const Validator = require('ms-amqp-validation');
+const Validator = require('ms-validation');
 const { validateSync } = new Validator('../schemas');
 
 module.exports = class MailerClient {
@@ -12,8 +12,8 @@ module.exports = class MailerClient {
     prefix: 'mailer',
     routes: {
       adhoc: 'adhoc',
-      predefined: 'predefined'
-    }
+      predefined: 'predefined',
+    },
   };
 
   /**
@@ -57,4 +57,4 @@ module.exports = class MailerClient {
     return this._amqp.publishAndWait(`${prefix}.${route}`, { account, email }, { timeout: 35000 });
   }
 
-}
+};
