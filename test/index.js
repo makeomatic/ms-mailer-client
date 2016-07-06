@@ -1,25 +1,21 @@
-const chai = require('chai');
-const { expect } = chai;
+/* eslint-disable global-require, prefer-arrow-callback */
+const assert = require('assert');
 
 describe('MailerClient', function testSuite() {
   const MailerClient = require('../src');
   const FakeAMQP = {};
 
   it('throws on invalid configuration', function test() {
-    expect(() => {
-      return new MailerClient(FakeAMQP, { routes: 'no', prefix: 10 });
-    }).to.throw(/ValidationError/);
+    assert.throws(() =>
+      new MailerClient(FakeAMQP, { routes: 'no', prefix: 10 })
+    , /ValidationError/);
   });
 
   it('throws on missing amqp client', function test() {
-    expect(() => {
-      return new MailerClient();
-    }).to.throw(/amqp client must be passed as a first argument/);
+    assert.throws(() => new MailerClient(), /amqp client must be passed as a first argument/);
   });
 
   it('constructs amqp client when correct configuration is passed', function test() {
-    expect(() => {
-      return new MailerClient(FakeAMQP);
-    }).to.not.throw();
+    assert.doesNotThrow(() => new MailerClient(FakeAMQP));
   });
 });

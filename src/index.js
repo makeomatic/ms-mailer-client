@@ -1,5 +1,5 @@
 const ld = require('lodash');
-const Validator = require('ms-validation');
+const Validator = require('ms-validation'); // eslint-disable-line import/no-extraneous-dependencies
 const { validateSync } = new Validator('../schemas');
 
 module.exports = class MailerClient {
@@ -23,7 +23,7 @@ module.exports = class MailerClient {
    * @return {MailerClient}
    */
   constructor(amqp, opts = {}) {
-    const config = this._config = ld.merge({}, MailerClient.defaultOpts, opts);
+    const config = this.config = ld.merge({}, MailerClient.defaultOpts, opts);
 
     // check configuration
     const isntValid = validateSync('config', config);
@@ -34,7 +34,8 @@ module.exports = class MailerClient {
     if (!amqp) {
       throw new Error('amqp client must be passed as a first argument');
     }
-    this._amqp = amqp;
+
+    this.amqp = amqp;
   }
 
   /**
@@ -44,8 +45,8 @@ module.exports = class MailerClient {
    * @param  {Object}        email
    * @return {Promise}
    */
-  send(account, email) {
-    const { routes, prefix } = this._config;
+  send(account, email, opts = {}) {
+    const { routes, prefix } = this.config;
 
     let route;
     if (typeof account === 'string') {
@@ -54,7 +55,10 @@ module.exports = class MailerClient {
       route = routes.adhoc;
     }
 
-    return this._amqp.publishAndWait(`${prefix}.${route}`, { account, email }, { timeout: 35000 });
+    const action = opts.wait ? 'publishAndWait' : 'publish';
+    const timeout = opts.timeout || 180000;
+
+    return this.amqp[action](`${prefix}.${route}`, { account, email }, { timeout });
   }
 
 };
