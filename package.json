@@ -1,6 +1,6 @@
 {
   "name": "ms-mailer-client",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "client for ms-mailer",
   "main": "./lib/index.js",
   "scripts": {
@@ -28,22 +28,22 @@
   },
   "homepage": "https://github.com/makeomatic/ms-mailer-client#readme",
   "devDependencies": {
-    "babel-cli": "^6.10.1",
-    "babel-eslint": "^6.1.0",
-    "babel-plugin-transform-class-properties": "^6.10.2",
-    "babel-plugin-transform-strict-mode": "^6.3.13",
-    "eslint": "^3.0.1",
-    "eslint-config-airbnb-base": "^4.0.0",
-    "eslint-plugin-import": "^1.10.2",
-    "eslint-plugin-mocha": "^4.0.0",
-    "mocha": "^2.3.4",
-    "ms-validation": "~2.x.x"
+    "babel-cli": "^6.11.4",
+    "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-class-properties": "^6.11.5",
+    "babel-plugin-transform-strict-mode": "^6.11.3",
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb-base": "^5.0.1",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-mocha": "^4.3.0",
+    "mocha": "^3.0.0",
+    "ms-validation": "^3.0.0"
   },
   "peerDependencies": {
-    "ms-validation": "~2.x.x",
-    "ms-amqp-transport": "~2.x.x || ~3.x.x"
+    "ms-validation": "~2.x.x || ~3.x.x",
+    "ms-amqp-transport": "~2.x.x || ~3.x.x || ~4.x.x"
   },
   "dependencies": {
-    "lodash": "^4.0.0"
+    "lodash": "^4.14.1"
   }
 }

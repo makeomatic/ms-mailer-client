@@ -1,5 +1,6 @@
 const ld = require('lodash');
-const Validator = require('ms-validation'); // eslint-disable-line import/no-extraneous-dependencies
+const Validator = require('ms-validation');
+
 const { validateSync } = new Validator('../schemas');
 
 module.exports = class MailerClient {

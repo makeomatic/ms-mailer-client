@@ -3,8 +3,8 @@ const assert = require('assert');
 
 describe('MailerClient', function testSuite() {
   const MailerClient = require('../src');
-  const FakeAMQP = {};
 
+  const FakeAMQP = {};
   it('throws on invalid configuration', function test() {
     assert.throws(() =>
       new MailerClient(FakeAMQP, { routes: 'no', prefix: 10 })
