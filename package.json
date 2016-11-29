@@ -1,6 +1,6 @@
 {
   "name": "ms-mailer-client",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "client for ms-mailer",
   "main": "./lib/index.js",
   "scripts": {
@@ -41,7 +41,7 @@
   },
   "peerDependencies": {
     "ms-validation": "~2.x.x || ~3.x.x",
-    "ms-amqp-transport": "~2.x.x || ~3.x.x || ~4.x.x || ~5.x.x"
+    "ms-amqp-transport": ">= 2.x.x < 8"
   },
   "dependencies": {
     "lodash": "^4.17.2"
