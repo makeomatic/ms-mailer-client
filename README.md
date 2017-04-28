@@ -1,5 +1,7 @@
 # Mailer microservice client
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/makeomatic/ms-mailer-client.svg)](https://greenkeeper.io/)
+
 Encapsulates raw AMQP methods into a convenience wrapper.
 
 ## Installation
