@@ -5,7 +5,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "compile": "babel -d ./lib ./src",
-    "prepublish": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "postversion": "git push && npm publish && git push --tags",
     "pretest": "npm rebuild",
     "lint": "eslint ./src",
