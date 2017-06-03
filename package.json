@@ -43,7 +43,7 @@
   },
   "peerDependencies": {
     "ms-amqp-transport": ">= 8.x.x < 10",
-    "ms-validation": "~4.x.x | ~5.x.x"
+    "ms-validation": "~4.x.x || ~5.x.x"
   },
   "dependencies": {
     "lodash": "^4.17.2"
