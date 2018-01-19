@@ -1,10 +1,10 @@
-const ld = require('lodash');
+const assert = require('assert');
+const merge = require('lodash.merge');
 const Validator = require('ms-validation');
 
 const { validateSync } = new Validator('../schemas');
 
 module.exports = class MailerClient {
-
   /**
    * Default options
    * @type {Object}
@@ -24,13 +24,10 @@ module.exports = class MailerClient {
    * @return {MailerClient}
    */
   constructor(amqp, opts = {}) {
-    const config = this.config = ld.merge({}, MailerClient.defaultOpts, opts);
+    const config = this.config = merge({}, MailerClient.defaultOpts, opts);
 
     // check configuration
-    const isntValid = validateSync('config', config);
-    if (isntValid.error) {
-      throw isntValid.error;
-    }
+    assert.ifError(validateSync('config', config).error);
 
     if (!amqp) {
       throw new Error('amqp client must be passed as a first argument');
@@ -61,5 +58,4 @@ module.exports = class MailerClient {
 
     return this.amqp[action](`${prefix}.${route}`, { account, email }, { timeout });
   }
-
 };

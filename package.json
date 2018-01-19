@@ -1,15 +1,14 @@
 {
   "name": "ms-mailer-client",
-  "version": "6.0.2",
+  "version": "7.0.0",
   "description": "client for ms-mailer",
   "main": "./lib/index.js",
   "scripts": {
     "compile": "babel -d ./lib ./src",
-    "prepublishOnly": "npm run compile",
+    "prepublishOnly": "yarn compile",
     "postversion": "git push && npm publish && git push --tags",
-    "pretest": "npm rebuild",
     "lint": "eslint ./src",
-    "test": "npm run lint && mocha --require babel-register --bail --timeout 10000 -R spec"
+    "test": "yarn lint && mocha --require babel-register --bail --timeout 10000 -R spec"
   },
   "keywords": [
     "microservice",
@@ -29,23 +28,25 @@
   },
   "homepage": "https://github.com/makeomatic/ms-mailer-client#readme",
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-eslint": "^7.1.1",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-plugin-transform-strict-mode": "^6.18.0",
-    "eslint": "^3.11.0",
-    "eslint-config-makeomatic": "^1.0.1",
-    "eslint-plugin-import": "^2.3.0",
-    "eslint-plugin-mocha": "^4.7.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "mocha": "^3.4.2",
-    "ms-validation": "^5.0.1"
+    "common-errors": "^1.0.5",
+    "eslint": "^4.15.0",
+    "eslint-config-makeomatic": "^2.0.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "mocha": "^5.0.0",
+    "ms-validation": "^7.0.0"
   },
   "peerDependencies": {
-    "ms-amqp-transport": ">= 8.x.x < 10",
-    "ms-validation": "~4.x.x || ~5.x.x"
+    "@microfleet/transport-amqp": ">= 12.x.x",
+    "common-errors": "~1.x.x",
+    "ms-validation": ">= 7.x.x"
   },
   "dependencies": {
-    "lodash": "^4.17.2"
+    "lodash.merge": "^4.6.0"
   }
 }

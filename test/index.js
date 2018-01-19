@@ -6,9 +6,11 @@ describe('MailerClient', function testSuite() {
 
   const FakeAMQP = {};
   it('throws on invalid configuration', function test() {
-    assert.throws(() =>
-      new MailerClient(FakeAMQP, { routes: 'no', prefix: 10 })
-    , /ValidationError/);
+    assert.throws(
+      () =>
+        new MailerClient(FakeAMQP, { routes: 'no', prefix: 10 })
+      , /ValidationError/
+    );
   });
 
   it('throws on missing amqp client', function test() {
