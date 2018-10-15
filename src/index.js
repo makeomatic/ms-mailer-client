@@ -1,6 +1,6 @@
 const assert = require('assert');
 const merge = require('lodash.merge');
-const Validator = require('ms-validation');
+const Validator = require('@microfleet/validation').default;
 
 const { validateSync } = new Validator('../schemas');
 
@@ -24,10 +24,12 @@ module.exports = class MailerClient {
    * @return {MailerClient}
    */
   constructor(amqp, opts = {}) {
-    const config = this.config = merge({}, MailerClient.defaultOpts, opts);
+    const config = merge({}, MailerClient.defaultOpts, opts);
 
-    // check configuration
-    assert.ifError(validateSync('config', config).error);
+    const { error, doc } = validateSync('config', config);
+    assert(!error, error);
+
+    this.config = doc;
 
     if (!amqp) {
       throw new Error('amqp client must be passed as a first argument');
