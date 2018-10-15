@@ -12,7 +12,8 @@
   },
   "files": [
     "lib/",
-    "src/"
+    "src/",
+    "schemas/"
   ],
   "keywords": [
     "microservice",
