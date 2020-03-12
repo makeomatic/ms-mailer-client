@@ -2,7 +2,7 @@ const assert = require('assert');
 const merge = require('lodash.merge');
 const Validator = require('@microfleet/validation').default;
 
-const { validateSync } = new Validator('../schemas');
+const validator = new Validator('../schemas');
 
 module.exports = class MailerClient {
   /**
@@ -26,7 +26,7 @@ module.exports = class MailerClient {
   constructor(amqp, opts = {}) {
     const config = merge({}, MailerClient.defaultOpts, opts);
 
-    const { error, doc } = validateSync('config', config);
+    const { error, doc } = validator.validateSync('config', config);
     assert(!error, error);
 
     this.config = doc;
