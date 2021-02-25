@@ -4,6 +4,21 @@ const Validator = require('@microfleet/validation').default;
 
 const validator = new Validator('../schemas');
 
+/**
+ * @typedef  {Object} NodeMailerMessage
+ * @property {String} from
+ * @property {String} to
+ * @property {String} subject
+ * @property {String} [text]
+ * @property {String} [html]
+ */
+
+/**
+ * @typedef  {Object}  SendOptions
+ * @property {Boolean} wait
+ * @property {Number}  timeout
+ */
+
 module.exports = class MailerClient {
   /**
    * Default options
@@ -39,17 +54,21 @@ module.exports = class MailerClient {
   }
 
   /**
-   * Sends an email
+   * Internal method to perform actual action request
    *
-   * @param  {String|Object} account
-   * @param  {Object}        email
+   * @param  {Object}        message
+   * @param  {String|Object} message.account
+   * @param  {String|Object} message.email
+   * @param  {Object}        [message.ctx]
+   * @param  {SendOptions}   [opts]
    * @return {Promise}
+   * @private
    */
-  send(account, email, opts = {}) {
+  _send(message, opts) {
     const { routes, prefix } = this.config;
 
     let route;
-    if (typeof account === 'string') {
+    if (typeof message.account === 'string') {
       route = routes.predefined;
     } else {
       route = routes.adhoc;
@@ -58,6 +77,33 @@ module.exports = class MailerClient {
     const action = opts.wait ? 'publishAndWait' : 'publish';
     const timeout = opts.timeout || 180000;
 
-    return this.amqp[action](`${prefix}.${route}`, { account, email }, { timeout });
+    return this.amqp[action](`${prefix}.${route}`, message, { timeout });
+  }
+
+  /**
+   * Sends an email
+   *
+   * @param  {String|Object}     account
+   * @param  {NodeMailerMessage} email
+   * @param  {SendOptions}       [opts]
+   * @return {Promise}
+   */
+  send(account, email, opts = {}) {
+    return this._send({ account, email }, opts);
+  }
+
+  /**
+   * Sends email with context
+   *
+   * @param  {String|Object}     account
+   * @param  {String}            template -- template name
+   * @param  {Object}            ctx
+   * @param  {NodeMailerMessage} ctx.nodemailer
+   * @param  {Object}            [ctx.template]
+   * @param  {SendOptions}       [opts]
+   * @return {Promise}
+   */
+  sendTemplate(account, template, ctx, opts = {}) {
+    return this._send({ account, email: template, ctx }, opts);
   }
 };
