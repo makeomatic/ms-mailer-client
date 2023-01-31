@@ -3,7 +3,8 @@
     "type": "object",
     "required": [
         "prefix",
-        "routes"
+        "routes",
+        "publishOptions"
     ],
     "properties": {
         "prefix": {
@@ -20,6 +21,18 @@
                 "predefined": {
                     "type": "string",
                     "minLength": 1
+                }
+            }
+        },
+        "publishOptions": {
+            "properties": {
+                "adhoc": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "predefined": {
+                    "type": "object",
+                    "additionalProperties": true
                 }
             }
         }

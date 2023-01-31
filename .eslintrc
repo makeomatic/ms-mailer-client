@@ -1,4 +1,6 @@
 {
   "extends": "makeomatic",
-  "parser": "babel-eslint"
+  "parserOptions": {
+    "ecmaVersion": 2023
+  }
 }

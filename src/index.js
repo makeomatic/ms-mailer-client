@@ -30,6 +30,10 @@ module.exports = class MailerClient {
       adhoc: 'adhoc',
       predefined: 'predefined',
     },
+    publishOptions: {
+      adhoc: {},
+      predefined: {},
+    },
   };
 
   /**
