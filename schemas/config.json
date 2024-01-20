@@ -25,6 +25,7 @@
             }
         },
         "publishOptions": {
+            "type": "object",
             "properties": {
                 "adhoc": {
                     "type": "object",

@@ -1,4 +1,4 @@
-const assert = require('assert');
+const assert = require('node:assert/strict');
 const merge = require('lodash.merge');
 const Validator = require('@microfleet/validation').default;
 
