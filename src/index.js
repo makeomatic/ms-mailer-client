@@ -2,8 +2,6 @@ const assert = require('node:assert/strict');
 const merge = require('lodash.merge');
 const Validator = require('@microfleet/validation').default;
 
-const validator = new Validator('../schemas');
-
 /**
  * @typedef  {Object} NodeMailerMessage
  * @property {String} from
@@ -43,18 +41,33 @@ module.exports = class MailerClient {
    * @return {MailerClient}
    */
   constructor(amqp, opts = {}) {
-    const config = merge({}, MailerClient.defaultOpts, opts);
-
-    const { error, doc } = validator.validateSync('config', config);
-    assert(!error, error);
-
-    this.config = doc;
+    this.config = merge({}, MailerClient.defaultOpts, opts);
+    this.validator = new Validator('../schemas');
+    this._isReady = false;
 
     if (!amqp) {
       throw new Error('amqp client must be passed as a first argument');
     }
 
     this.amqp = amqp;
+  }
+
+  async ready() {
+    await this.validator.init();
+    const { error, doc } = this.validator.validateSync('config', this.config);
+    assert(!error, error);
+    this.config = doc;
+    this._isReady = true;
+  }
+
+  async verifyReady() {
+    if (this._isReady !== true) {
+      if (this._isReady === false) {
+        this._isReady = this.ready();
+      }
+
+      await this._isReady;
+    }
   }
 
   /**
@@ -68,7 +81,9 @@ module.exports = class MailerClient {
    * @return {Promise}
    * @private
    */
-  _send(message, opts) {
+  async _send(message, opts) {
+    await this.verifyReady();
+
     const { routes, prefix } = this.config;
 
     let route;
